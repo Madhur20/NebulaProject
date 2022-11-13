@@ -1,4 +1,4 @@
-# NebulaProject
+# NebulaProject (HackUTD IX)
 
 ## Inspiration
 We were inspired to do this challenge because of our own experiences and difficulties with multiple semesters of using the traditional website to look up courses. If this app becomes an option for UTD students, we think it will help them greatly, especially the new students.
