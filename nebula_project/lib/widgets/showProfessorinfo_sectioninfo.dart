@@ -24,7 +24,10 @@ class ProfessorinfoSection extends StatelessWidget {
               radius: 25,
             ),
           ),
-          Text(info, style: TextStyle(fontSize: 40),),
+          Text(
+            info,
+            style: TextStyle(fontSize: 30),
+          ),
         ],
       ),
     );

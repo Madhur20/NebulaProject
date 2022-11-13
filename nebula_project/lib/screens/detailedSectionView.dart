@@ -322,8 +322,7 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                                               " " +
                                                               coursenum +
                                                               " " +
-                                                              info["professors"]
-                                                                  [0]),
+                                                              profName),
                                                       mode: LaunchMode
                                                           .externalApplication);
                                                   print("pressed");
