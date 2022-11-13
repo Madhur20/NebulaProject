@@ -26,6 +26,7 @@ We learned about using APIs and parsing the data to use as we want. Most importa
 ## What's next for Nebula Labs
 Next, we plan on integrating the rest of the Nebula endpoints. In the long term, we hope to be able to have the functionality of letting students register for their courses directly from our app as well.
 
+![image](https://user-images.githubusercontent.com/59988556/201534787-cf91eead-f484-4d48-9303-3a25bc7940fa.png)
 ![image](https://user-images.githubusercontent.com/59988556/201534231-1e355f5a-be51-4509-9b18-efd1f1436cbb.png)
 ![image](https://user-images.githubusercontent.com/59988556/201534245-c13503a9-339c-4dca-b5f8-8e60902bbfd9.png)
 ![image](https://user-images.githubusercontent.com/59988556/201534250-228fa07a-3ed4-4fe6-96ba-7316304c7ca8.png)
