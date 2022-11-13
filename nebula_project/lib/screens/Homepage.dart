@@ -19,17 +19,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-
+  var coursePrefix;
+  var courseNum;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
+
   bool viewSearch = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
+
     return Stack(
       children: [
         Scaffold(
@@ -39,7 +41,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 children: [
                   Container(
                     width: size.width / 2,
-                    
                     decoration: BoxDecoration(color: Colors.black),
                   ),
                   Container(
@@ -56,12 +57,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
                             InputField(
                                 label: "Course Prefix",
                                 labelColor: Colors.white,
                                 content: "CS",
-                                method: (value) => {}),
+                                method: (value) => {
+                                      coursePrefix = value,
+                                    }),
                             SizedBox(
                               height: 25,
                             ),
@@ -69,7 +71,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 label: "Course Number",
                                 labelColor: Colors.white,
                                 content: "4v95",
-                                method: (value) => {}),
+                                method: (value) => {
+                                      courseNum = value,
+                                    }),
                             SizedBox(
                               height: 25,
                             ),
@@ -122,11 +126,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ],
           ),
         ),
-        viewSearch? GestureDetector(onTap:() {
-          setState(() {
-            viewSearch = false;
-          });
-        }, child: SearchResults(coursePrefix: "CS", courseNum: "4v95")):SizedBox()
+        viewSearch
+            ? GestureDetector(
+                onTap: () {
+                  setState(() {
+                    viewSearch = false;
+                  });
+                },
+                child: SearchResults(coursePrefix: "CS", courseNum: "4348"))
+            : SizedBox()
       ],
     );
   }

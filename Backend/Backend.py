@@ -5,7 +5,14 @@ import json
 import re
 import pickle
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+
+NEBULA_KEY = os.getenv('NEBULA_API_KEY')
+nebulaURL = "https://api.utdnebula.com/"
+courseID = ""
 
 app = Flask(__name__)
 CORS(app)
@@ -52,151 +59,33 @@ def register(name,  email, password):
 
 @app.route('/courseInfo/prefix=<prefix>/number=<number>', methods=['GET'])
 def courseInfo(prefix,  number):
-
-    return jsonify({
-        "course_number": "6363",
-        "grading": "grading",
-        "corequisites": {
-            "name": "name",
-            "options": [{}, {}],
-            "required": 0
-        },
-        "description": "CS 6363 Design and Analysis of Computer Algorithms (3 semester credit hours) The study of efficient algorithms for various computational problems. Algorithm design techniques. Sorting, manipulation of data structures, graphs, matrix multiplication, and pattern matching. Complexity of algorithms, lower bounds, NP completeness. Prerequisites: CS 5333 and CS 5343. (3-0) S",
-        "internal_course_number": "internal_course_number",
-        "laboratory_contact_hours": "laboratory_contact_hours",
-        "title": "DESIGN & ANALYS-COMP ALGORITHM",
-        "offering_frequency": "offering_frequency",
-        "prerequisites": {
-            "name": "name",
-            "options": [{}, {}],
-            "required": 0
-        },
-        "subject_prefix": "CS",
-        "class_level": "class_level",
-        "school": "ECSS",
-        "activity_type": "activity_type",
-        "_id": "_id",
-        "lecture_contact_hours": "lecture_contact_hours",
-        "credit_hours": "3"
-    })
+    header = {'x-api-key': NEBULA_KEY}
+    r = requests.get(nebulaURL+"course?subject_prefix=" +
+                     prefix+"&course_number="+number, headers=header)
+    jsonObj = r.json()
+    courseID = jsonObj["data"][0]["_id"]
+    print(courseID)
+    return jsonObj["data"][0]
 
 
-@app.route('/sections/prefix=<prefix>/number=<number>/term=<term>', methods=['GET'])
-def sectionInfo(prefix,  number, term):
+@app.route('/sections/course_reference=<courseID>', methods=['GET'])
+def sectionInfo(courseID):
+    header = {'x-api-key': NEBULA_KEY}
+    r = requests.get(
+        nebulaURL+"section/?academic_session.name=17F&course_reference="+courseID, headers=header)
+    jsonObj = r.json()
+    print(jsonObj)
+    return jsonObj
 
-    return jsonify({"details": [{
-        "course_reference": "course_reference",
-        "instruction_mode": "in-person",
-        "internal_class_number": "internal_class_number",
-        "syllabus_uri": "https://stackoverflow.com/questions/43583411/how-to-create-a-hyperlink-in-flutter-widget",
-        "section_corequisites": {
-            "name": "name",
-            "options": [{}, {}],
-            "required": 0
-        },
-        "grade_distribution": [0, 0],
-        "professors": ["Neeraj Gupta"],
-        "meetings": [{
-            "end_date": "end_date",
-            "start_time": "11:00 AM",
-            "modality": "modality",
-            "meeting_days": ["Tuesday", "Friday"],
-            "end_time": "12:45 PM",
-            "location": {
-                "map_uri": "map_uri",
-                "building": "ECSS",
-                "room": "2.402"
-            },
-            "start_date": "start_date"
-        }, {
-            "end_date": "end_date",
-            "start_time": "start_time",
-            "modality": "modality",
-            "meeting_days": ["meeting_days", "meeting_days"],
-            "end_time": "end_time",
-            "location": {
-                "map_uri": "map_uri",
-                "building": "building",
-                "room": "room"
-            },
-            "start_date": "start_date"
-        }],
-        "_id": "_id",
-        "teaching_assistants": [{
-            "role": "role",
-            "last_name": "last_name",
-            "first_name": "first_name",
-            "email": "email"
-        }, {
-            "role": "role",
-            "last_name": "last_name",
-            "first_name": "first_name",
-            "email": "email"
-        }],
-        "academic_session": {
-            "end_date": "10/2/5",
-            "name": "name",
-            "start_date": "10/5/5"
-        },
-        "core_flags": ["020", "050"],
-        "section_number": "003"
-    }, {
-        "course_reference": "course_reference",
-        "instruction_mode": "in-person",
-        "internal_class_number": "internal_class_number",
-        "syllabus_uri": "https://stackoverflow.com/questions/43583411/how-to-create-a-hyperlink-in-flutter-widget",
-        "section_corequisites": {
-            "name": "name",
-            "options": [{}, {}],
-            "required": 0
-        },
-        "grade_distribution": [0, 0],
-        "professors": ["Neeraj Gupta"],
-        "meetings": [{
-            "end_date": "end_date",
-            "start_time": "start_time",
-            "modality": "modality",
-            "meeting_days": ["Monday", "Wednesday"],
-            "end_time": "end_time",
-            "location": {
-                "map_uri": "map_uri",
-                "building": "building",
-                "room": "room"
-            },
-            "start_date": "start_date"
-        }, {
-            "end_date": "end_date",
-            "start_time": "start_time",
-            "modality": "modality",
-            "meeting_days": ["meeting_days", "meeting_days"],
-            "end_time": "end_time",
-            "location": {
-                "map_uri": "map_uri",
-                "building": "building",
-                "room": "room"
-            },
-            "start_date": "start_date"
-        }],
-        "_id": "_id",
-        "teaching_assistants": [{
-            "role": "role",
-            "last_name": "last_name",
-            "first_name": "first_name",
-            "email": "email"
-        }, {
-            "role": "role",
-            "last_name": "last_name",
-            "first_name": "first_name",
-            "email": "email"
-        }],
-        "academic_session": {
-            "end_date": "10/2/5",
-            "name": "name",
-            "start_date": "10/5/5"
-        },
-        "core_flags": ["020", "050"],
-        "section_number": "003"
-    }]})
+
+# @app.route('/professor/<professorID>', methods=['GET'])
+# def profInfo(professorID):
+#     header = {'x-api-key': NEBULA_KEY}
+#     r = requests.get(
+#         nebulaURL+"professor/"+professorID, headers=header)
+#     jsonObj = r.json()
+#     print(jsonObj)
+#     return jsonObj
 
 
 if __name__ == "__main__":

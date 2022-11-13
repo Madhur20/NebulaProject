@@ -24,8 +24,7 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      home: SearchResults(courseNum: "4v95", coursePrefix: "CS",),
-
+      home: HomePage(),
       // home:ProffStats(name: "Karen Mazidi"),
     );
   }

@@ -12,7 +12,11 @@ class SectionInfo extends StatelessWidget {
   var info;
   var coursenum;
   var coursePrefix;
-  SectionInfo({required this.info, required this.coursePrefix, required this.coursenum});
+
+  SectionInfo(
+      {required this.info,
+      required this.coursePrefix,
+      required this.coursenum});
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +45,9 @@ class SectionInfo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(
-                  width: width/2-100,
+                  width: width / 2 - 100,
                   child: ProfessorinfoSection(
                     info: info["professors"][0],
                   ),

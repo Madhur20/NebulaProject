@@ -36,7 +36,7 @@ class InputField extends StatelessWidget {
               //color: (Colors.blue[50])!,
               child: TextField(
                 obscureText: label == "password"?true:false,
-                onChanged: (value) => {method(value)},
+                onChanged: (value) => {method(value.toUpperCase())},
                 style: TextStyle(
                   fontSize: 20.0,
                 ),

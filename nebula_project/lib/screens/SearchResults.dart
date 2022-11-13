@@ -28,24 +28,32 @@ class _SearchResultsState extends State<SearchResults> {
   var courseNum;
   var courseInfo;
   var sectionsinfo;
+  var courseID;
   _SearchResultsState({required this.coursePrefix, required this.courseNum}) {
+    print(coursePrefix + " " + courseNum);
     http
         .get(Uri.parse("http://127.0.0.1:5000/courseInfo/prefix=" +
             coursePrefix +
             "/number=" +
             courseNum))
         .then((value) => {
+              // print(value.body),
               setState(() {
                 courseInfo = json.decode(value.body) as Map<String, dynamic>;
-              })
-            });
-    http
-        .get(Uri.parse(
-            "http://127.0.0.1:5000/sections/prefix=jkgdsf/number=saddfsf/term=sdafdsf"))
-        .then((value) => {
-              setState(() {
-                sectionsinfo = (json.decode(value.body)
-                    as Map<String, dynamic>)["details"];
+                courseID = courseInfo["_id"];
+                // print("here " + courseInfo["_id"]);
+              }),
+              http
+                  .get(Uri.parse(
+                      "http://127.0.0.1:5000/sections/course_reference=" +
+                          courseID))
+                  .then((value) {
+                var j = (json.decode(value.body) as Map<String, dynamic>);
+                setState(() {
+                  // print(value.body.toString());
+                  sectionsinfo = j["data"];
+                });
+                print("there" + sectionsinfo.toString());
               })
             });
   }
@@ -169,19 +177,45 @@ class _SearchResultsState extends State<SearchResults> {
                         SingleChildScrollView(
                           child: Container(
                             padding: EdgeInsets.all(20),
-                            child: Column(
-                              children: sectionsinfo == null
-                                  ? []
-                                  : [
-                                      Container(padding: EdgeInsets.only(bottom: 50),width: MediaQuery.of(context).size.width -MediaQuery.of(context).size.width / 3-200 ,child: Text("choose a section to view more details", style: TextStyle(fontSize: 36, ),softWrap: true,textAlign: TextAlign.center,)),
-                                      for (var val in sectionsinfo) ...[
-                                        Container(
-                                            padding:
-                                                EdgeInsets.only(bottom: 25),
-                                            child: SectionInfo(info: val, coursePrefix: coursePrefix, coursenum: courseNum,))
-                                      ]
-                                    ],
-                            ),
+                            child: sectionsinfo != null
+                                ? Column(
+                                    children: sectionsinfo == null
+                                        ? []
+                                        : [
+                                            Container(
+                                                padding:
+                                                    EdgeInsets.only(bottom: 50),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        3 -
+                                                    200,
+                                                child: Text(
+                                                  "choose a section to view more details",
+                                                  style: TextStyle(
+                                                    fontSize: 36,
+                                                  ),
+                                                  softWrap: true,
+                                                  textAlign: TextAlign.center,
+                                                )),
+                                            for (var val in sectionsinfo) ...[
+                                              if (val["professors"].length != 0)
+                                                Container(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 25),
+                                                    child: SectionInfo(
+                                                      info: val,
+                                                      coursePrefix:
+                                                          coursePrefix,
+                                                      coursenum: courseNum,
+                                                    ))
+                                            ]
+                                          ],
+                                  )
+                                : SizedBox(),
                           ),
                         )
                       ],
