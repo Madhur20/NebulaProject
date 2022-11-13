@@ -21,10 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: LandingScreen(),
       // home:ProffStats(name: "Karen Mazidi"),
     );
   }
