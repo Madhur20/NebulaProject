@@ -78,14 +78,14 @@ def sectionInfo(courseID):
     return jsonObj
 
 
-# @app.route('/professor/<professorID>', methods=['GET'])
-# def profInfo(professorID):
-#     header = {'x-api-key': NEBULA_KEY}
-#     r = requests.get(
-#         nebulaURL+"professor/"+professorID, headers=header)
-#     jsonObj = r.json()
-#     print(jsonObj)
-#     return jsonObj
+@app.route('/professor/<professorID>', methods=['GET'])
+def profInfo(professorID):
+    header = {'x-api-key': NEBULA_KEY}
+    r = requests.get(
+        nebulaURL+"professor/"+professorID, headers=header)
+    jsonObj = r.json()
+    print(jsonObj)
+    return jsonObj
 
 
 if __name__ == "__main__":

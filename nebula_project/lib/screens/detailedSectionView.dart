@@ -21,23 +21,30 @@ class DetailedSectionView extends StatefulWidget {
   var info;
   var coursenum;
   var coursePrefix;
+  var profName;
   DetailedSectionView(
       {required this.info,
       required this.coursePrefix,
-      required this.coursenum});
+      required this.coursenum,
+      required this.profName});
   @override
   State<DetailedSectionView> createState() => _DetailedSectionViewState(
-      info: info, coursePrefix: coursePrefix, coursenum: coursenum);
+      info: info,
+      coursePrefix: coursePrefix,
+      coursenum: coursenum,
+      profName: profName);
 }
 
 class _DetailedSectionViewState extends State<DetailedSectionView> {
   var info;
   var coursenum;
   var coursePrefix;
+  var profName;
   _DetailedSectionViewState(
       {required this.info,
       required this.coursePrefix,
-      required this.coursenum}) {}
+      required this.coursenum,
+      required this.profName}) {}
   @override
   void initState() {
     // TODO: implement initState
@@ -98,7 +105,7 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                     padding:
                                         EdgeInsets.only(top: 5.0, bottom: 15.0),
                                     child: Text(
-                                      info["professors"][0],
+                                      profName,
                                       style: TextStyle(
                                           fontSize: 30.0,
                                           fontWeight: FontWeight.w900,
@@ -112,8 +119,7 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                   Container(
                                       padding: EdgeInsets.only(
                                           top: 5.0, bottom: 5.0),
-                                      child: ProffStats(
-                                          name: info["professors"][0])),
+                                      child: ProffStats(name: profName)),
                                   SizedBox(
                                     height: 50.0,
                                   ),
@@ -144,20 +150,23 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                     style: TextStyle(fontSize: 100),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                    padding: const EdgeInsets.only(
+                                        top: 20, bottom: 20),
                                     child: Card(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20.0)),
                                       elevation: 7,
                                       child: Container(
-                                        width: size.width - size.width / 3 - 180,
+                                        width:
+                                            size.width - size.width / 3 - 180,
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(15.0),
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
                                               child: Row(
                                                 children: [
                                                   Text(
@@ -170,15 +179,16 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                                     child: Text(
                                                       info["academic_session"]
                                                           ["start_date"],
-                                                      style:
-                                                          TextStyle(fontSize: 60),
+                                                      style: TextStyle(
+                                                          fontSize: 60),
                                                     ),
                                                   )
                                                 ],
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(15.0),
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
                                               child: Row(
                                                 children: [
                                                   Text(
@@ -191,8 +201,8 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                                     child: Text(
                                                       info["academic_session"]
                                                           ["end_date"],
-                                                      style:
-                                                          TextStyle(fontSize: 60),
+                                                      style: TextStyle(
+                                                          fontSize: 60),
                                                     ),
                                                   )
                                                 ],
@@ -204,7 +214,8 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                    padding: const EdgeInsets.only(
+                                        top: 20, bottom: 20),
                                     child: Card(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -223,14 +234,14 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                               for (var vals
                                                   in info["core_flags"]) ...[
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(15.0),
+                                                  padding: const EdgeInsets.all(
+                                                      15.0),
                                                   child: Card(
                                                     elevation: 10,
                                                     child: Text(
                                                       vals,
-                                                      style:
-                                                          TextStyle(fontSize: 40),
+                                                      style: TextStyle(
+                                                          fontSize: 40),
                                                     ),
                                                   ),
                                                 )
@@ -240,7 +251,8 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                         )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                    padding: const EdgeInsets.only(
+                                        top: 20, bottom: 20),
                                     child: Card(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -272,8 +284,9 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                                         600,
                                                     child: Text(
                                                       info["syllabus_uri"],
-                                                      style:
-                                                          TextStyle(fontSize: 20, color: Colors.blue),
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.blue),
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                     )),
@@ -283,7 +296,8 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                         )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                    padding: const EdgeInsets.only(
+                                        top: 20, bottom: 20),
                                     child: Card(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -326,8 +340,9 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                                           coursenum +
                                                           " " +
                                                           info["professors"][0],
-                                                      style:
-                                                          TextStyle(fontSize: 20, color: Colors.blue),
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.blue),
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                     )),

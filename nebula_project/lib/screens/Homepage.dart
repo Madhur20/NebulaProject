@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     viewSearch = false;
                   });
                 },
-                child: SearchResults(coursePrefix: "CS", courseNum: "4348"))
+                child: SearchResults(coursePrefix: "HIST", courseNum: "1301"))
             : SizedBox()
       ],
     );
