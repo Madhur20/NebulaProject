@@ -65,7 +65,7 @@ class _SectionInfoState extends State<SectionInfo> {
                     info: widget.info,
                     coursePrefix: widget.coursePrefix,
                     coursenum: widget.coursenum,
-                    profName: profName,
+                    profName: profName == null ? "loading..." : profName,
                   )),
         );
       },
@@ -83,7 +83,7 @@ class _SectionInfoState extends State<SectionInfo> {
                 Container(
                   width: width / 2 - 100,
                   child: ProfessorinfoSection(
-                    info: profName,
+                    info: profName == null ? "loading..." : profName,
                   ),
                 ),
                 ShowSectionDetails(

@@ -180,7 +180,7 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                                       info["academic_session"]
                                                           ["start_date"],
                                                       style: TextStyle(
-                                                          fontSize: 60),
+                                                          fontSize: 40),
                                                     ),
                                                   )
                                                 ],
@@ -202,7 +202,7 @@ class _DetailedSectionViewState extends State<DetailedSectionView> {
                                                       info["academic_session"]
                                                           ["end_date"],
                                                       style: TextStyle(
-                                                          fontSize: 60),
+                                                          fontSize: 40),
                                                     ),
                                                   )
                                                 ],
